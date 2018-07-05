@@ -1,6 +1,5 @@
 ## Thank you for accepting the challenge! Please find below the description of the task:
- 
-* Please implement a  PHP Symfony 2/3-Application, which generates a github resumé for a given github account similar to http://resume.github.io/ 
+ * Please implement a  PHP Symfony 2/3-Application, which generates a github resumé for a given github account similar to http://resume.github.io/ 
 * Create a landing page at which the user enters the account name (e.g. “mxcl”)
 * Implement a “generate button” on the landing page that redirects to a generated resumé page
 * The resume page shows the following things:
