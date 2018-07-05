@@ -3,6 +3,7 @@
 use AppBundle\Form\Data\ResumeSubmit;
 use AppBundle\Form\Type\ResumeSubmitType;
 use AppBundle\Services\GithubResumeFactory;
+use Github\Exception\ExceptionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,7 +36,15 @@ class ResumeController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $resume = $resumeFactory->create($resumeSubmit->getUsername());
+            try{
+                $resume = $resumeFactory->create($resumeSubmit->getUsername());
+            } catch (ExceptionInterface $exception) {
+                $this->addFlash(
+                    'error',
+                    'Could not retrieve data from github'
+                );
+                return $this->redirectToRoute('resume_create');
+            }
 
             return $this->render('resume/view.html.twig', [
                 'resume' => $resume,
