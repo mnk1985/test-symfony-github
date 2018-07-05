@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Resume</h1>
+
+    {% if userDetails is defined %}
+        {{ dump(userDetails) }}
+    {% endif %}
+
+    {% if repositories is defined %}
+        {{ dump(repositories) }}
+    {% endif %}
+
+    {% if resume is defined %}
+
+        <table class="table">
+            {% if resume.username is defined %}
+                <tr>
+                    <th scope="row">Username</th>
+                    <td>{{ resume.username }}</td>
+                </tr>
+            {% endif %}
+
+            {% if resume.website is defined %}
+                <tr>
+                    <th scope="row">Website</th>
+                    <td>{{ resume.website }}</td>
+                </tr>
+            {% endif %}
+
+            {% if resume.repositories is defined %}
+                <tr>
+                    <th scope="row">Repositories Amount</th>
+                    <td>{{ resume.repositories|length }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Repositories</th>
+                    <td>
+                        <ul class="list-group">
+                            {% for repo in resume.repositories %}
+                                <li class="list-group-item"> {{ repo.name }} | <a href="{{ repo.link }}">{{ repo.link }}</a> | {{ repo.description }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endif %}
+
+            {% if resume.languages is defined %}
+                <tr>
+                    <th scope="row">Programming languages</th>
+                    <td>
+                        <ul class="list-group">
+                            {% for lang, perc in resume.languages %}
+                                <li class="list-group-item"> {{ lang }} ({{ perc }}%)</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endif %}
+        </table>
+    {% endif %}
+
+{% endblock %}

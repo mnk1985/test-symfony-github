@@ -29,7 +29,13 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
-    # add more services, or override services that need manual wiring
-    # AppBundle\Service\ExampleService:
-    #     arguments:
-    #         $someArgument: 'some_value'
+    AppBundle\Services\GithubDataProvider:
+        arguments:
+            $user: '%github_client_id%'
+            $password: '%github_client_secret%'
+            $method: 'url_client_id'
+
+    AppBundle\Services\GithubResumeFactory:
+        arguments:
+            $githubDataProvider: '@AppBundle\Services\GithubDataProvider'
+            $formFactory: '@form.factory'

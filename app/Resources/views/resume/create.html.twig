@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Create your resume</h1>
+
+    {{ form_start(form, {'action': path('resume_generate'), 'method': 'POST'}) }}
+    {{ form_widget(form) }}<br>
+
+    <input type="submit" class="btn btn-primary" value="Generate resume" />
+
+    {{ form_end(form) }}
+
+{% endblock %}
